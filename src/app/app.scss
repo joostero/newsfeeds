@@ -14,25 +14,33 @@
 }
 
 ul {
+  background: #fff;
   display: block;
   margin: 0;
+  height: 917px !important;
   padding-inline-start: 0;
   width: 710px;
 }
 
 li {
-  background: #fff;
+
   display: grid;
   list-style: none;
   grid-template-columns: 40px 370px 230px 40px 40px;
-  grid-template-rows: 25px auto auto;
+  grid-template-rows: auto;
   grid-template-areas:
-    '. date source source .'
     '. header header . .'
     '. story story . .';
   width: 710px;
-  min-height: 917px;
   align-content: start;
+
+  &:first-of-type {
+    grid-template-rows: 25px auto auto;
+    grid-template-areas:
+    '. date source source .'
+    '. header header . .'
+    '. story story . .';
+  }
 }
 
 a {

@@ -1,21 +1,23 @@
 <main class="news">
-  @if (selectedItem(); as item) {
+  @if (selectedItems().length) {
     <ul>
-      <li>
-        <p class="date">{{ item.date }}</p>
-        <p class="source">{{ item.source }}</p>
-        <h1>
-          {{ item.title }}
-        </h1>
-        <div class="story">
-          <p>
-            @if (item.imageUrl) {
-              <img [src]="item.imageUrl" [alt]="item.title" />
-            }
-            {{ item.description }}
-          </p>
-        </div>
-      </li>
+      @for (item of selectedItems(); track item.link) {
+        <li>
+          <p class="date">{{ item.date }}</p>
+          <p class="source">{{ item.source }}</p>
+          <h1>
+            {{ item.title }}
+          </h1>
+          <div class="story">
+            <p>
+              @if (item.imageUrl) {
+                <img [src]="item.imageUrl" [alt]="item.title" />
+              }
+              {{ item.description }}
+            </p>
+          </div>
+        </li>
+      }
     </ul>
   } @else {
     <p class="empty">Geen nieuws gevonden.</p>

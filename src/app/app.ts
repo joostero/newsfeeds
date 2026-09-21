@@ -33,28 +33,30 @@ export class App {
     { initialValue: 1 }
   );
 
-  protected readonly selectedItem = computed<NewsItem | null>(() => {
+  protected readonly selectedItems = computed<NewsItem[]>(() => {
     const items = this.items();
-    const index = this.newsItemIndex() - 1;
-    return items[index] ?? null;
+    const start = this.newsItemIndex() - 1;
+    return items.slice(start, start + 2);
   });
 
   constructor() {
     this.http.get('data/news.xml', { responseType: 'text' }).subscribe((xml) => {
       const doc = new DOMParser().parseFromString(xml, 'application/xml');
-      const items = Array.from(doc.querySelectorAll('item')).map((item) => {
-        const link = item.querySelector('link')?.textContent ?? '';
-        const pubDate = item.querySelector('pubDate')?.textContent ?? '';
+      const items = Array.from(doc.querySelectorAll('item'))
+        .filter((item) => !(item.querySelector('title')?.textContent ?? '').startsWith('Video |'))
+        .map((item) => {
+          const link = item.querySelector('link')?.textContent ?? '';
+          const pubDate = item.querySelector('pubDate')?.textContent ?? '';
 
-        return {
-          title: item.querySelector('title')?.textContent ?? '',
-          link,
-          description: item.querySelector('description')?.textContent ?? '',
-          date: this.formatDate(pubDate),
-          source: this.hostname(link),
-          imageUrl: item.querySelector('enclosure')?.getAttribute('url') ?? ''
-        };
-      });
+          return {
+            title: item.querySelector('title')?.textContent ?? '',
+            link,
+            description: item.querySelector('description')?.textContent ?? '',
+            date: this.formatDate(pubDate),
+            source: this.hostname(link),
+            imageUrl: item.querySelector('enclosure')?.getAttribute('url') ?? ''
+          };
+        });
 
       this.items.set(items);
     });

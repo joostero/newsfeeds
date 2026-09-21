@@ -24,7 +24,7 @@ export class App {
   private readonly http = inject(HttpClient);
   private readonly route = inject(ActivatedRoute);
 
-  protected readonly title = signal('newsfeeds');
+  protected readonly title = signal('Isero Nieuws');
   protected readonly items = signal<NewsItem[]>([]);
 
   // 1-based index from the `newsItem` query parameter (defaults to 1).

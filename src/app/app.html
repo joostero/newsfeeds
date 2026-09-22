@@ -1,10 +1,12 @@
 <main class="news">
   @if (selectedItems().length) {
     <ul>
-      @for (item of selectedItems(); track item.link) {
+      @for (item of selectedItems(); track item.link; let counter = $index) {
         <li>
-          <p class="date">{{ item.date }}</p>
-          <p class="source">{{ item.source }}</p>
+          @if (counter === 0) {
+            <p class="date">{{ item.date }}</p>
+            <p class="source">{{ item.source }}</p>
+          }
           <h1>
             {{ item.title }}
           </h1>
@@ -24,4 +26,4 @@
   }
 </main>
 
-<router-outlet />
+<!-- <router-outlet /> -->

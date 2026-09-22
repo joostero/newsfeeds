@@ -11,19 +11,20 @@
 .news {
   display: flex;
   justify-content: flex-start;
+  height: 917px !important;
+  background: #fff;
+  width: 710px !important;
+  overflow: hidden !important;
 }
 
 ul {
-  background: #fff;
   display: block;
   margin: 0;
-  height: 917px !important;
   padding-inline-start: 0;
-  width: 710px;
+  overflow: hidden;
 }
 
 li {
-
   display: grid;
   list-style: none;
   grid-template-columns: 40px 370px 230px 40px 40px;
@@ -37,9 +38,9 @@ li {
   &:first-of-type {
     grid-template-rows: 25px auto auto;
     grid-template-areas:
-    '. date source source .'
-    '. header header . .'
-    '. story story . .';
+      '. date source source .'
+      '. header header . .'
+      '. story story . .';
   }
 }
 

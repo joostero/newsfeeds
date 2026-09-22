@@ -1,0 +1,7 @@
+{
+  "/rss": {
+    "target": "https://www.nu.nl",
+    "secure": true,
+    "changeOrigin": true
+  }
+}

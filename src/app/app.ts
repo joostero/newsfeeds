@@ -39,7 +39,7 @@ export class App {
   });
 
   constructor() {
-    this.http.get('data/news.xml', { responseType: 'text' }).subscribe((xml) => {
+    this.http.get('/rss', { responseType: 'text' }).subscribe((xml) => {
       const doc = new DOMParser().parseFromString(xml, 'application/xml');
       const items = Array.from(doc.querySelectorAll('item'))
         .filter((item) => !(item.querySelector('title')?.textContent ?? '').includes('|'))

@@ -43,7 +43,7 @@ export class App {
     this.http.get('data/news.xml', { responseType: 'text' }).subscribe((xml) => {
       const doc = new DOMParser().parseFromString(xml, 'application/xml');
       const items = Array.from(doc.querySelectorAll('item'))
-        .filter((item) => !(item.querySelector('title')?.textContent ?? '').startsWith('Video |'))
+        .filter((item) => !(item.querySelector('title')?.textContent ?? '').includes('|'))
         .map((item) => {
           const link = item.querySelector('link')?.textContent ?? '';
           const pubDate = item.querySelector('pubDate')?.textContent ?? '';

@@ -15,7 +15,6 @@ interface NewsItem {
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
   templateUrl: './app.html',
   styleUrl: './app.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -40,10 +39,10 @@ export class App {
   });
 
   constructor() {
-    this.http.get('data/news.xml', { responseType: 'text' }).subscribe((xml) => {
+    this.http.get('/rss', { responseType: 'text' }).subscribe((xml) => {
       const doc = new DOMParser().parseFromString(xml, 'application/xml');
       const items = Array.from(doc.querySelectorAll('item'))
-        .filter((item) => !(item.querySelector('title')?.textContent ?? '').startsWith('Video |'))
+        .filter((item) => !(item.querySelector('title')?.textContent ?? '').includes('|'))
         .map((item) => {
           const link = item.querySelector('link')?.textContent ?? '';
           const pubDate = item.querySelector('pubDate')?.textContent ?? '';
